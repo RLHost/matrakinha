@@ -1,92 +1,93 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Sparkles, ArrowRight } from 'lucide-react';
-import { scrollToSection } from '../utils/scroll';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
-export const Hero = () => {
+export default function Hero() {
   return (
-    <section id="hero" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      {/* Background Ornaments */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute -top-20 -left-20 w-96 h-96 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-        <div className="absolute top-20 -right-20 w-96 h-96 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-40 w-96 h-96 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+    <section id="hero" className="relative flex items-center min-h-[90vh] pt-20 overflow-hidden">
+      {/* Background with soft organic shapes */}
+      <div className="absolute inset-0 z-0 bg-sky-50">
+        <div className="absolute top-0 right-0 w-2/3 -translate-y-1/4 translate-x-1/4 h-2/3 bg-brand-rose/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 translate-y-1/4 -translate-x-1/4 h-1/2 bg-brand-teal/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-brand-teal font-bold text-sm shadow-sm mb-6 border border-teal-50">
-              <Sparkles className="w-4 h-4" />
-              <span>Especialistas em Primeira Infância</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 leading-tight mb-6">
-              Desbloqueie o Potencial da <span className="text-brand-rose relative">
-                Comunicação
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-brand-teal opacity-30" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
-                </svg>
-              </span> do Seu Filho.
-            </h1>
-            <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
-              Não espere o "tempo dele". Acelere o desenvolvimento da fala e da linguagem com nossa fonoaudiologia lúdica, acolhedora e especializada na primeira infância.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => scrollToSection('contato')}
-                className="bg-brand-rose hover:bg-rose-600 text-white font-bold text-lg px-8 py-4 rounded-full shadow-xl shadow-rose-200 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                Quero Agendar Avaliação 
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="mt-8 flex items-center gap-4 text-sm text-slate-500 font-medium">
-              <div className="flex -space-x-2">
-                <img className="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=100&q=80" alt="Mãe feliz" />
-                <img className="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1542044896530-05d85be9b11a?auto=format&fit=crop&w=100&q=80" alt="Criança" />
-                <div className="w-10 h-10 rounded-full border-2 border-white bg-teal-100 flex items-center justify-center text-brand-teal font-bold">+5k</div>
-              </div>
-              <p>Famílias transformadas por nossos especialistas.</p>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-rose-100/50 aspect-square lg:aspect-[4/5]">
-              <img 
-                src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=800&q=80" 
-                alt="Criança sorrindo em terapia" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-            </div>
-            
-            {/* Floating Badge */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-6 bg-white p-4 rounded-3xl shadow-xl flex items-center gap-4 border border-rose-50"
+      <div className="container relative z-10 grid items-center grid-cols-1 gap-12 px-6 mx-auto md:px-12 lg:grid-cols-2">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-2xl"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-semibold rounded-full bg-brand-teal/10 text-brand-teal">
+            <Sparkles size={16} />
+            <span>Especialistas em Primeira Infância</span>
+          </div>
+          
+          <h1 className="mb-6 text-4xl font-extrabold leading-tight text-slate-800 md:text-5xl lg:text-6xl">
+            Transforme a Comunicação do Seu Filho e Construa um <span className="text-brand-rose">Futuro Brilhante</span>.
+          </h1>
+          
+          <p className="mb-8 text-lg leading-relaxed text-slate-600 md:text-xl">
+            Não deixe o desenvolvimento do seu maior tesouro para depois. Nossa metodologia lúdica destrava a fala e estimula a linguagem de forma natural, acolhedora e divertida.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a 
+              href="https://wa.me/5511978783723"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-white transition-all rounded-full shadow-lg bg-brand-rose hover:bg-rose-600 hover:shadow-xl hover:-translate-y-1"
             >
-              <div className="bg-rose-100 p-3 rounded-full text-brand-rose">
-                <HeartPulse className="w-6 h-6" />
+              Quero Avaliar Meu Filho Agora
+              <ArrowRight size={20} />
+            </a>
+          </div>
+          
+          <div className="flex items-center gap-4 mt-8">
+            <div className="flex -space-x-3">
+               {/* Fake avatars for social proof */}
+              {[1, 2, 3].map((i) => (
+                <img key={i} src={`https://i.pravatar.cc/100?img=${i + 30}`} alt="Mãe" className="w-10 h-10 border-2 border-white rounded-full" />
+              ))}
+            </div>
+            <p className="text-sm text-slate-500">
+              <span className="font-bold text-slate-700">+500 famílias</span> já transformaram suas vidas conosco.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative"
+        >
+          <div className="relative z-10 overflow-hidden shadow-2xl rounded-3xl">
+            <img 
+              src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&w=800&q=80"
+              alt="Criança sorrindo enquanto brinca e aprende"
+              className="object-cover w-full h-[500px]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+          </div>
+          
+          {/* Floating Elements for Organic Feel */}
+          <motion.div 
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            className="absolute z-20 p-4 bg-white shadow-xl -bottom-6 -left-6 rounded-2xl"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-full bg-brand-yellow/20">
+                <Sparkles className="text-brand-yellow" size={24} />
               </div>
               <div>
-                <p className="font-bold text-slate-800">Abordagem Lúdica</p>
-                <p className="text-sm text-slate-500">Aprender brincando</p>
+                <p className="font-bold text-slate-800">Atendimento Lúdico</p>
+                <p className="text-xs text-slate-500">Aprender brincando</p>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-};
+}

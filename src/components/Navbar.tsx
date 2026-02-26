@@ -1,79 +1,124 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, HeartPulse } from 'lucide-react';
-import { scrollToSection } from '../utils/scroll';
-import { motion } from 'motion/react';
+import { Menu, X, Baby } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-export const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const handleScrollEvent = () => {
+      setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScrollEvent);
+    return () => window.removeEventListener('scroll', handleScrollEvent);
   }, []);
 
-  const handleNavClick = (id: string) => {
-    setIsMobileMenuOpen(false);
-    setTimeout(() => scrollToSection(id), 100);
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    setTimeout(() => {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100); // Pequeno delay para mobile fechar o menu antes de rolar
   };
 
+  const navLinks = [
+    { name: 'O Desafio', id: 'dores' },
+    { name: 'Nossa Solução', id: 'servicos' },
+    { name: 'Especialistas', id: 'sobre' },
+  ];
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavClick('hero')}>
-            <div className="bg-brand-rose p-2 rounded-2xl">
-              <HeartPulse className="text-white w-6 h-6" />
+    <header 
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}
+    >
+      <div className="container px-6 mx-auto md:px-12">
+        <div className="flex items-center justify-between">
+          <a 
+            href="#" 
+            onClick={(e) => handleSmoothScroll(e, 'hero')} 
+            className="flex items-center gap-2 group"
+          >
+            <div className="p-2 transition-colors rounded-full bg-brand-rose/10 group-hover:bg-brand-rose/20">
+              <Baby className="text-brand-rose" size={28} />
             </div>
-            <span className="font-extrabold text-2xl tracking-tight text-slate-800">
-              Matrakinha<span className="text-brand-rose">.</span>
+            <span className="text-2xl font-bold tracking-tight text-slate-800">
+              Matrak<span className="text-brand-rose">inha</span>
             </span>
-          </div>
+          </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 font-semibold text-slate-600">
-            <button onClick={() => handleNavClick('dores')} className="hover:text-brand-rose transition-colors">Sintomas</button>
-            <button onClick={() => handleNavClick('solucoes')} className="hover:text-brand-rose transition-colors">Tratamentos</button>
-            <button onClick={() => handleNavClick('sobre')} className="hover:text-brand-rose transition-colors">A Clínica</button>
-            <button 
-              onClick={() => handleNavClick('contato')}
-              className="bg-brand-rose hover:bg-rose-600 text-white px-6 py-2.5 rounded-full shadow-md shadow-rose-200 transition-all transform hover:scale-105 active:scale-95"
+          <nav className="items-center hidden gap-8 md:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleSmoothScroll(e, link.id)}
+                className="font-medium text-slate-600 hover:text-brand-rose transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a 
+              href="https://wa.me/5511978783723"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2.5 font-bold text-white transition-transform rounded-full shadow-lg bg-brand-rose hover:bg-rose-600 hover:-translate-y-1"
             >
-              Agendar Avaliação
-            </button>
+              Agendar Agora
+            </a>
           </nav>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden text-slate-800 p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 md:hidden text-slate-800"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
+      {/* Mobile Nav */}
+      {isOpen && (
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-rose-50 p-4 flex flex-col gap-4 rounded-b-3xl"
+          className="absolute left-0 w-full bg-white shadow-xl top-full rounded-b-3xl md:hidden"
         >
-          <button onClick={() => handleNavClick('dores')} className="text-left text-lg font-semibold p-2 text-slate-700">Sintomas</button>
-          <button onClick={() => handleNavClick('solucoes')} className="text-left text-lg font-semibold p-2 text-slate-700">Tratamentos</button>
-          <button onClick={() => handleNavClick('sobre')} className="text-left text-lg font-semibold p-2 text-slate-700">A Clínica</button>
-          <button 
-            onClick={() => handleNavClick('contato')}
-            className="bg-brand-rose text-white text-center text-lg font-bold px-6 py-3 rounded-full mt-2 shadow-lg"
-          >
-            Agendar Avaliação Agora
-          </button>
+          <div className="flex flex-col p-6 space-y-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleSmoothScroll(e, link.id)}
+                className="pb-2 text-lg font-medium border-b border-slate-100 text-slate-600"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a 
+              href="https://wa.me/5511978783723"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-3 mt-4 font-bold text-center text-white rounded-full bg-brand-rose"
+            >
+              Agendar Avaliação
+            </a>
+          </div>
         </motion.div>
       )}
     </header>
   );
-};
+}

@@ -1,61 +1,78 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { ShieldCheck, Heart, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { HeartPulse, CheckCircle2 } from 'lucide-react';
 
-export const About = () => {
+export default function About() {
+  const features = [
+    "Avaliação detalhada e acolhedora",
+    "Plano terapêutico individualizado",
+    "Orientação constante aos pais",
+    "Ambiente 100% adaptado para crianças"
+  ];
+
   return (
-    <section id="sobre" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-rose-50 rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
-          {/* Deco */}
-          <div className="absolute top-0 right-0 p-8 opacity-10">
-            <Heart className="w-48 h-48 text-rose-500" />
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-            >
-              <img 
-                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80" 
-                alt="Equipe Clínica Matrakinha"
-                className="rounded-[2.5rem] shadow-2xl border-4 border-white rotate-2 hover:rotate-0 transition-transform duration-500"
-              />
-            </motion.div>
-
-            <div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6">
-                Um ambiente seguro, projetado exclusivamente para a <span className="text-brand-rose">Primeira Infância</span>.
-              </h2>
-              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                A Clínica Matrakinha nasceu de um propósito único: ser o braço direito de pais e mães no desenvolvimento da fala e linguagem infantil.
-              </p>
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                Sabemos que o consultório médico tradicional assusta as crianças. Por isso, criamos um universo lúdico, cheio de cores e afeto, onde cada sessão é esperada com alegria pelo seu pequeno.
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-rose-100 flex items-start gap-3">
-                  <ShieldCheck className="text-brand-teal w-6 h-6 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-slate-800">Profissionais Capacitados</h4>
-                    <p className="text-sm text-slate-500">Fonoaudiólogos especializados em pediatria.</p>
-                  </div>
+    <section id="sobre" className="py-24 bg-white">
+      <div className="container px-6 mx-auto md:px-12">
+        <div className="grid items-center grid-cols-1 gap-16 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="absolute inset-0 bg-brand-rose/10 translate-x-4 translate-y-4 rounded-[3rem] -z-10"></div>
+            <img 
+              src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?auto=format&fit=crop&w=800&q=80"
+              alt="Fonoaudióloga brincando com criança"
+              className="object-cover w-full h-[600px] rounded-[3rem] shadow-xl"
+            />
+            <div className="absolute p-6 bg-white shadow-2xl -bottom-8 -right-8 rounded-3xl">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-brand-teal/10">
+                  <HeartPulse className="text-brand-teal" size={32} />
                 </div>
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-rose-100 flex items-start gap-3">
-                  <Star className="text-yellow-500 w-6 h-6 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-slate-800">Método Lúdico</h4>
-                    <p className="text-sm text-slate-500">Resultados mais rápidos através da brincadeira.</p>
-                  </div>
+                <div>
+                  <p className="text-2xl font-black text-slate-800">Amor &</p>
+                  <p className="font-medium text-slate-500">Ciência Juntos</p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="mb-6 text-3xl font-extrabold md:text-4xl text-slate-800">
+              Anos transformando pequenos silêncios em <span className="text-brand-rose">grandes diálogos</span>.
+            </h2>
+            <p className="mb-6 text-lg leading-relaxed text-slate-600">
+              A Clínica Matrakinha nasceu de um sonho: criar um espaço onde a intervenção fonoaudiológica deixasse de ser monótona e se tornasse o momento mais aguardado da semana pelas crianças.
+            </p>
+            <p className="mb-8 text-lg leading-relaxed text-slate-600">
+              Nossa equipe de especialistas respira o universo da primeira infância. Entendemos a angústia dos pais e pegamos na sua mão durante toda a jornada de desenvolvimento do seu filho.
+            </p>
+
+            <ul className="space-y-4 mb-10">
+              {features.map((feature, idx) => (
+                <li key={idx} className="flex items-center gap-3 text-slate-700">
+                  <CheckCircle2 className="text-brand-teal" size={24} />
+                  <span className="text-lg font-medium">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a 
+              href="https://wa.me/5511978783723"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-4 font-bold text-white transition-all rounded-full bg-brand-rose hover:bg-rose-600 hover:-translate-y-1 shadow-lg hover:shadow-xl"
+            >
+              Agendar a Primeira Consulta
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>
   );
-};
+}

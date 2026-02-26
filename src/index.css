@@ -3,9 +3,5 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: auto; /* Controlado via JS para offset */
-}
-
-body {
-  font-family: 'Nunito', sans-serif;
+  scroll-behavior: auto; /* Desativado nativo para usar o customizado em JS */
 }

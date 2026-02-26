@@ -6,15 +6,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
         brand: {
           rose: '#f43f5e',
-          teal: '#14b8a6',
-          soft: '#fff1f2',
+          teal: '#0d9488',
+          yellow: '#fbbf24',
+          sky: '#bae6fd'
         }
-      },
-      fontFamily: {
-        sans: ['Nunito', 'sans-serif'],
       }
     },
   },

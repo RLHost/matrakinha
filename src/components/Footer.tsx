@@ -1,88 +1,69 @@
-import React from 'react';
-import { HeartPulse, Instagram, MapPin, Phone, ExternalLink } from 'lucide-react';
-import { scrollToSection } from '../utils/scroll';
+import { Instagram, Phone, MapPin, Baby } from 'lucide-react';
 
-export const Footer = () => {
-  const whatsappNumber = "5511978783723";
-  const whatsappMsg = encodeURIComponent("Olá! Vim pelo site e gostaria de agendar uma avaliação para o meu filho.");
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMsg}`;
-
+export default function Footer() {
   return (
-    <footer id="contato" className="bg-slate-900 text-slate-300 pt-20 pb-10 rounded-t-[3rem] mt-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-12 mb-16">
+    <footer className="pt-16 pb-8 bg-slate-900 text-slate-300">
+      <div className="container px-6 mx-auto md:px-12">
+        <div className="grid grid-cols-1 gap-12 mb-12 md:grid-cols-3">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <div className="bg-brand-rose p-2 rounded-2xl">
-                <HeartPulse className="text-white w-6 h-6" />
+              <div className="p-2 rounded-full bg-brand-rose/20">
+                <Baby className="text-brand-rose" size={28} />
               </div>
-              <span className="font-extrabold text-2xl tracking-tight text-white">
-                Matrakinha<span className="text-brand-rose">.</span>
+              <span className="text-2xl font-bold tracking-tight text-white">
+                Matrak<span className="text-brand-rose">inha</span>
               </span>
             </div>
-            <p className="text-slate-400 mb-6">
-              Especialistas em desenvolvimento da fala, linguagem e primeira infância. Transformando o futuro das nossas crianças com amor e ciência.
+            <p className="mb-6 leading-relaxed text-slate-400">
+              Especialistas em destravar a fala e o desenvolvimento na primeira infância com amor, ludicidade e ciência.
             </p>
-            <div className="flex gap-4">
-              <a href="https://www.instagram.com/clinica_matrakinha/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-rose hover:text-white transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Contatos */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Navegação</h3>
-            <ul className="space-y-4">
-              <li><button onClick={() => scrollToSection('hero')} className="hover:text-brand-rose transition-colors">Início</button></li>
-              <li><button onClick={() => scrollToSection('dores')} className="hover:text-brand-rose transition-colors">Identifique os Sintomas</button></li>
-              <li><button onClick={() => scrollToSection('solucoes')} className="hover:text-brand-rose transition-colors">Como Ajudamos</button></li>
-              <li><button onClick={() => scrollToSection('sobre')} className="hover:text-brand-rose transition-colors">A Clínica</button></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">Fale Conosco</h3>
+            <h4 className="mb-6 text-lg font-bold text-white uppercase tracking-wider">Contato Direto</h4>
             <ul className="space-y-4">
               <li>
-                <a href={whatsappLink} target="_blank" rel="noreferrer" className="flex items-start gap-3 hover:text-brand-rose transition-colors group">
-                  <Phone className="w-5 h-5 mt-1 text-brand-teal group-hover:text-brand-rose" />
-                  <div>
-                    <p className="font-bold text-white group-hover:text-brand-rose transition-colors">(11) 97878-3723</p>
-                    <p className="text-sm text-slate-400">Agende via WhatsApp</p>
-                  </div>
+                <a href="https://wa.me/5511978783723" className="flex items-center gap-3 transition-colors hover:text-brand-rose">
+                  <Phone size={20} className="text-brand-teal" />
+                  <span>(11) 97878-3723</span>
                 </a>
               </li>
               <li>
-                <a href="https://share.google/ODdcKQAsXse5F40R4" target="_blank" rel="noreferrer" className="flex items-start gap-3 hover:text-brand-rose transition-colors group">
-                  <MapPin className="w-5 h-5 mt-1 text-brand-teal group-hover:text-brand-rose" />
-                  <div>
-                    <p className="font-bold text-white flex items-center gap-2 group-hover:text-brand-rose transition-colors">
-                      Nossa Localização <ExternalLink className="w-3 h-3" />
-                    </p>
-                    <p className="text-sm text-slate-400">Clique para ver no Google Maps</p>
-                  </div>
+                <a href="https://www.instagram.com/clinica_matrakinha/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 transition-colors hover:text-brand-rose">
+                  <Instagram size={20} className="text-brand-teal" />
+                  <span>@clinica_matrakinha</span>
                 </a>
               </li>
+              <li className="flex items-start gap-3">
+                <MapPin size={20} className="shrink-0 text-brand-teal mt-1" />
+                <span>São Paulo, SP<br/><span className="text-sm text-slate-500">(Atendimento presencial)</span></span>
+              </li>
             </ul>
-            <a 
-              href={whatsappLink}
+          </div>
+
+          {/* CTA Urgente */}
+          <div>
+             <h4 className="mb-6 text-lg font-bold text-white uppercase tracking-wider">Não perca tempo</h4>
+             <p className="mb-6 text-slate-400">
+               Os primeiros anos são a janela de ouro do desenvolvimento cerebral. Proteja o futuro do seu filho hoje.
+             </p>
+             <a 
+              href="https://wa.me/5511978783723"
               target="_blank"
-              rel="noreferrer"
-              className="inline-block mt-8 bg-brand-rose hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full transition-colors w-full text-center"
+              rel="noopener noreferrer"
+              className="block w-full py-3 font-bold text-center text-white transition-colors rounded-lg bg-brand-teal hover:bg-teal-600"
             >
-              Agendar Avaliação Agora
+              Garantir Minha Vaga
             </a>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© {new Date().getFullYear()} Clínica Matrakinha. Todos os direitos reservados.</p>
-          <p>Feito com ❤️ para o desenvolvimento infantil.</p>
+        <div className="pt-8 text-sm text-center border-t border-slate-800 text-slate-500">
+          <p>&copy; {new Date().getFullYear()} Clínica Matrakinha. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
   );
-};
+}
